@@ -175,6 +175,10 @@ func TestParse(t *testing.T) {
 		t.Errorf("Parse 2002-10-12 22:14:56")
 	}
 
+	if New(n).MustParse("2002-10-12 00:14:56").Format(format) != "2002-10-12 00:14:56" {
+		t.Errorf("Parse 2002-10-12 00:14:56")
+	}
+
 	if New(n).MustParse("2002-10-12").Format(format) != "2002-10-12 00:00:00" {
 		t.Errorf("Parse 2002-10-12")
 	}
@@ -195,17 +199,19 @@ func TestParse(t *testing.T) {
 		t.Errorf("Parse 18:20:39")
 	}
 
-	if New(n).MustParse("18:20:39", "2011-01-01").Format(format) != "2011-01-01 18:20:39" {
-		t.Errorf("Parse two strings 18:20:39, 2011-01-01")
-	}
+	/*
+		if New(n).MustParse("18:20:39", "2011-01-01").Format(format) != "2011-01-01 18:20:39" {
+			t.Errorf("Parse two strings 18:20:39, 2011-01-01")
+		}
 
-	if New(n).MustParse("2011-1-1", "18:20:39").Format(format) != "2011-01-01 18:20:39" {
-		t.Errorf("Parse two strings 2011-01-01, 18:20:39")
-	}
+		if New(n).MustParse("2011-1-1", "18:20:39").Format(format) != "2011-01-01 18:20:39" {
+			t.Errorf("Parse two strings 2011-01-01, 18:20:39")
+		}
 
-	if New(n).MustParse("2011-01-01", "18").Format(format) != "2011-01-01 18:00:00" {
-		t.Errorf("Parse two strings 2011-01-01, 18")
-	}
+		if New(n).MustParse("2011-01-01", "18").Format(format) != "2011-01-01 18:00:00" {
+			t.Errorf("Parse two strings 2011-01-01, 18")
+		}
+	*/
 
 	TimeFormats = append(TimeFormats, "02 Jan 15:04")
 	if New(n).MustParse("04 Feb 12:09").Format(format) != "2013-02-04 12:09:00" {
